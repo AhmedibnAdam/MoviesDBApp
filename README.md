@@ -27,6 +27,7 @@ movies.
 - **Concurrency**: Async/Await  
 - **Testing**: XCTest for UI and Unit Tests  
 
+## NO third party framework (pods OR spm)
 
 
 ## Installation  
