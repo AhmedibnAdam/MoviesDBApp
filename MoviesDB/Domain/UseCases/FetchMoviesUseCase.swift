@@ -6,8 +6,14 @@
 //
 
 
+import Foundation
+
+protocol BaseModel: Codable {
+}
+
+
 protocol FetchMoviesUseCase {
-    func execute(endpoint: String) async throws -> [Movie]
+    func execute(params: BaseModel?) async throws -> [Movie]
 }
 
 class FetchMoviesUseCaseImpl: FetchMoviesUseCase {
@@ -17,23 +23,9 @@ class FetchMoviesUseCaseImpl: FetchMoviesUseCase {
         self.movieRepository = movieRepository
     }
 
-    func execute(endpoint: String) async throws -> [Movie] {
-        return try await movieRepository.fetchMovies(endpoint: endpoint)
-    }
-}
+    func execute(params: BaseModel?) async throws -> [Movie] {
+        guard let parameters = params as? MoviesEntity.MoviesListRequestModel else { return [] }
 
-protocol FetchMovieDetailsUseCase {
-    func execute(movieId: Int) async throws -> Movie
-}
-
-class FetchMovieDetailsUseCaseImpl: FetchMovieDetailsUseCase {
-    private let movieRepository: MovieRepository
-
-    init(movieRepository: MovieRepository) {
-        self.movieRepository = movieRepository
-    }
-
-    func execute(movieId: Int) async throws -> Movie {
-        return try await movieRepository.fetchMovieDetails(movieId: movieId)
+        return try await movieRepository.fetchMovies(type: parameters.movieType.rawValue)
     }
 }

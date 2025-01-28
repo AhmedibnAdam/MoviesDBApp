@@ -7,7 +7,7 @@
 import Foundation
 
 protocol NetworkService {
-    func performRequest(endpoint: String) async throws -> Data
+    func performRequest(endpoint: APIEndPoint) async throws -> Data
 }
 
 final class URLSessionNetworkService: NetworkService {
@@ -15,16 +15,16 @@ final class URLSessionNetworkService: NetworkService {
     // Default timeout for network requests.
     private let timeoutInterval: TimeInterval = 30
     
-    func performRequest(endpoint: String) async throws -> Data {
+    func performRequest(endpoint: APIEndPoint) async throws -> Data {
         
-        // Step 1: Construct the URL.
-        guard let url = URL(string: "\(Configuration.shared.serverURL)\(endpoint)?api_key=\(Configuration.shared.apiKey)") else {
+        guard let url = URL(string: "\(Configuration.shared.serverURL)\(endpoint.path)?api_key=\(Configuration.shared.apiKey)") else {
             throw NetworkError.invalidURL
         }
-
+        
         // Step 2: Create a URLRequest and configure the timeout.
         var request = URLRequest(url: url)
         request.timeoutInterval = timeoutInterval
+        
 
         // Step 3: Perform the network request.
         do {

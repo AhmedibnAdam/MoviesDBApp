@@ -10,9 +10,23 @@ import Foundation
 
 // MARK: - Models
 
-struct MovieResponse: Decodable {
-    let results: [Movie]
+struct MoviesEntity {
+    
+    struct MoviesListRequestModel: BaseModel {
+        let movieType: MovieType
+    }
+    
+    struct MoviesDetailsRequestModel: BaseModel {
+        let id: Int
+    }
+
+    struct MovieResponse: Decodable {
+        let results: [Movie]
+    }
+    
+    
 }
+
 
 struct Movie: Decodable, Identifiable {
     let id: Int

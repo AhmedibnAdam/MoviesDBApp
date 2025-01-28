@@ -6,8 +6,8 @@
 //
 
 protocol MovieRepository {
-    func fetchMovies(endpoint: String) async throws -> [Movie]
-    func fetchMovieDetails(movieId: Int) async throws -> Movie
+    func fetchMovies(type: String) async throws -> [Movie]
+    func fetchMovieDetails(id: Int) async throws -> Movie
 }
 
 class MovieRepositoryImpl: MovieRepository {
@@ -17,17 +17,17 @@ class MovieRepositoryImpl: MovieRepository {
         self.movieService = movieService
     }
 
-    func fetchMovies(endpoint: String) async throws -> [Movie] {
+    func fetchMovies(type: String) async throws -> [Movie] {
         do {
-            return try await movieService.fetchMovies(endpoint: endpoint)
+            return try await movieService.fetchMovies(type: type)
         } catch {
             throw self.mapError(error)
         }
     }
 
-    func fetchMovieDetails(movieId: Int) async throws -> Movie {
+    func fetchMovieDetails(id: Int) async throws -> Movie {
         do {
-            return try await movieService.fetchMovieDetails(movieId: movieId)
+            return try await movieService.fetchMovieDetails(id: id)
         } catch {
             throw self.mapError(error)
         }

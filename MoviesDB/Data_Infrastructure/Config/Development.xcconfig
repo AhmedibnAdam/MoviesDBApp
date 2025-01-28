@@ -9,8 +9,8 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 
-SERVER_URL = https:/$()/api.themoviedb.org/3
-ROOT_URL = https:/$()/api.themoviedb.org/3
+SERVER_URL = https:/$()/api.themoviedb.org/3/movie/
+ROOT_URL = https:/$()/api.themoviedb.org/3/movie/
 
 
 // Keys

@@ -13,6 +13,7 @@ enum NetworkError: Error, LocalizedError {
     case clientError(statusCode: Int)
     case unknownStatusCode(statusCode: Int)
     case networkFailure(error: Error)
+    case parameterEncodingFailed
 
     var errorDescription: String? {
         switch self {
@@ -28,6 +29,8 @@ enum NetworkError: Error, LocalizedError {
             return "Unexpected status code: \(statusCode)."
         case .networkFailure(let error):
             return "Network failure: \(error.localizedDescription)"
+        case .parameterEncodingFailed:
+            return "parameterEncodingFailed"
         }
     }
 }

@@ -6,7 +6,7 @@
 //
 
 
-enum MovieType: String, CaseIterable {
+enum MovieType: String, CaseIterable, Codable {
     case nowPlaying = "now_playing"
     case upcoming = "upcoming"
     case popular = "popular"

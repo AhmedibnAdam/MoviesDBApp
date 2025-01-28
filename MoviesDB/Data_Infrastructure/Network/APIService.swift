@@ -10,8 +10,8 @@ import Foundation
 
 // MARK: - Abstractions
 protocol MovieService {
-    func fetchMovies(endpoint: String) async throws -> [Movie]
-    func fetchMovieDetails(movieId: Int) async throws -> Movie
+    func fetchMovies(type: String) async throws -> [Movie]
+    func fetchMovieDetails(id: Int) async throws -> Movie
 }
 
 final class TMDBMovieService: MovieService {
@@ -21,14 +21,14 @@ final class TMDBMovieService: MovieService {
         self.networkService = networkService
     }
     
-    func fetchMovies(endpoint: String) async throws -> [Movie] {
-        let data = try await networkService.performRequest(endpoint: "/movie/\(endpoint)")
-        let movieResponse = try JSONDecoder().decode(MovieResponse.self, from: data)
+    func fetchMovies(type: String) async throws -> [Movie] {
+        let data = try await networkService.performRequest(endpoint: MoviesEndpoint.getMoviesList(type: type))
+        let movieResponse = try JSONDecoder().decode(MoviesEntity.MovieResponse.self, from: data)
         return movieResponse.results
     }
     
-    func fetchMovieDetails(movieId: Int) async throws -> Movie {
-        let data = try await networkService.performRequest(endpoint: "/movie/\(movieId)")
+    func fetchMovieDetails(id: Int) async throws -> Movie {
+        let data = try await networkService.performRequest(endpoint: MoviesEndpoint.getMovie(id: id))
         let movie = try JSONDecoder().decode(Movie.self, from: data)
         return movie
     }
