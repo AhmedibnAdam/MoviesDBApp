@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftUI
 
 struct MovieListView: View {
     @ObservedObject private var viewModel: MovieListViewModel
@@ -19,21 +18,12 @@ struct MovieListView: View {
         NavigationStack {
             VStack {
                 if viewModel.isLoading {
-                    ProgressView("Loading...")
-                        .progressViewStyle(CircularProgressViewStyle())
-                        .padding()
+                    LoadingView()
                 } else if let errorMessage = viewModel.errorMessage {
-                    VStack {
-                        Text(errorMessage)
-                            .foregroundColor(.red)
-                            .multilineTextAlignment(.center)
-                            .padding()
-                        Button("Retry") {
-                            Task {
-                                await viewModel.fetchMovies()
-                            }
+                    ErrorView(errorMessage: errorMessage) {
+                        Task {
+                            await viewModel.fetchMovies()
                         }
-                        .buttonStyle(.bordered)
                     }
                 } else {
                     List(viewModel.movies) { movie in
@@ -56,15 +46,15 @@ struct MovieListView: View {
                                 }
                             }
                         }
-                    }
-                    .navigationTitle(viewModel.movieType.label.capitalized)
-                }
+                    }                }
             }
             .onAppear {
                 Task {
                     await viewModel.fetchMovies()
                 }
             }
+            .navigationTitle(viewModel.movieType.label.capitalized)
         }
     }
 }
+
