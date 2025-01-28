@@ -31,7 +31,7 @@ class HomeViewModelTests: XCTestCase {
 
     func testUpdateSelectedMovieType() {
         // Given
-        let newType: MovieType = .nowPlaying
+        let newType: MoviesDB.MovieType = MoviesDB.MovieType.nowPlaying
 
         // When
         viewModel.updateSelectedMovieType(to: newType)

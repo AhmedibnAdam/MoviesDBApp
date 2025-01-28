@@ -11,13 +11,20 @@ import Combine
 
 class MockFetchMoviesUseCase: FetchMoviesUseCase {
     
-    private let movieRepository: MockMovieService = MockMovieService()
-    func execute(params: MoviesEntity.MoviesListRequestModel?) async throws -> [Movie] {
-        guard let type = params?.movieType.rawValue  else { return [] }
+    private let movieRepository: MockMovieService
 
-        return try await movieRepository.fetchMovies(type: type)
+    init(mockedMovieRepository: MockMovieService) {
+        self.movieRepository = mockedMovieRepository
+    }
+
+    func execute(params: BaseModel?) async throws -> [Movie] {
+        guard let parameters = params as? MoviesEntity.MoviesListRequestModel else {
+            return []
+        }
+        return try await movieRepository.fetchMovies(type: parameters.movieType.rawValue)
     }
 
 }
+
 
 
