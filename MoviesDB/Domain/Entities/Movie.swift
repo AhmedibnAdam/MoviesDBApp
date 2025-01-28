@@ -37,6 +37,16 @@ struct Movie: Decodable, Identifiable {
     let genres: [Genre]?
     let runtime: Int?
     
+    init(id: Int, title: String, release_date: String, poster_path: String?, overview: String?, genres: [Genre]?, runtime: Int?) {
+        self.id = id
+        self.title = title
+        self.release_date = release_date
+        self.poster_path = poster_path
+        self.overview = overview
+        self.genres = genres
+        self.runtime = runtime
+    }
+    
     var posterURL: URL? {
         guard let path = poster_path else { return nil }
         return URL(string: "https://image.tmdb.org/t/p/w500\(path)")

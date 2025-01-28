@@ -38,7 +38,7 @@ final class MovieListViewModel: ObservableObject {
         } catch let error as NetworkError {
             errorMessage = error.localizedDescription
         } catch {
-            errorMessage = "An unexpected error occurred. Please try again."
+            errorMessage = "An unexpected error "
         }
         
         isLoading = false

@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol BaseModel: Codable {
-}
-
-
 protocol FetchMoviesUseCase {
     func execute(params: BaseModel?) async throws -> [Movie]
 }

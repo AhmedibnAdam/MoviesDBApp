@@ -9,7 +9,7 @@
 import SwiftUI
 
 @MainActor
-final class MovieListCoordinator: Coordinator {
+class MovieListCoordinator: Coordinator {
     private let movieType: MovieType
 
     init(movieType: MovieType) {
