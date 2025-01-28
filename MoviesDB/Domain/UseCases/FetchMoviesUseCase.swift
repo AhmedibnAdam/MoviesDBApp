@@ -11,7 +11,7 @@ import Foundation
 protocol FetchMoviesUseCase {
     func execute(params: BaseModel?) async throws -> [Movie]
 }
-
+    
 class FetchMoviesUseCaseImpl: FetchMoviesUseCase {
     private let movieRepository: MovieRepository
 

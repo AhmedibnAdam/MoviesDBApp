@@ -18,12 +18,21 @@ struct MovieListView: View {
         NavigationStack {
             VStack {
                 if viewModel.isLoading {
-                    LoadingView()
+                    ProgressView("Loading...")
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .padding()
                 } else if let errorMessage = viewModel.errorMessage {
-                    ErrorView(errorMessage: errorMessage) {
-                        Task {
-                            await viewModel.fetchMovies()
+                    VStack {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                        Button("Retry") {
+                            Task {
+                                await viewModel.fetchMovies()
+                            }
                         }
+                        .buttonStyle(.bordered)
                     }
                 } else {
                     List(viewModel.movies) { movie in
