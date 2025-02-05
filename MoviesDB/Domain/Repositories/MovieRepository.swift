@@ -5,19 +5,15 @@
 //  Created by Ahmad on 27/01/2025.
 //
 
-protocol MovieRepository {
-    func fetchMovies(type: String) async throws -> [Movie]
-    func fetchMovieDetails(id: Int) async throws -> Movie
+protocol MovieRepositoryProtocol {
+    func fetchMovies(type: String) async throws -> [MoviesEntity.Movie]
+    func fetchMovieDetails(id: Int) async throws -> MoviesEntity.Movie
 }
 
-class MovieRepositoryImpl: MovieRepository {
-    private let movieService: MovieService
+class MovieRepository: MovieRepositoryProtocol {
+    private let movieService: MovieService = TMDBMovieService()
 
-    init(movieService: MovieService) {
-        self.movieService = movieService
-    }
-
-    func fetchMovies(type: String) async throws -> [Movie] {
+    func fetchMovies(type: String) async throws -> [MoviesEntity.Movie] {
         do {
             return try await movieService.fetchMovies(type: type)
         } catch {
@@ -25,7 +21,7 @@ class MovieRepositoryImpl: MovieRepository {
         }
     }
 
-    func fetchMovieDetails(id: Int) async throws -> Movie {
+    func fetchMovieDetails(id: Int) async throws -> MoviesEntity.Movie {
         do {
             return try await movieService.fetchMovieDetails(id: id)
         } catch {
