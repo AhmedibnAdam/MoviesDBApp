@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MovieGenresView: View {
-    let genres: [Genre]?
+    let genres: [MoviesEntity.Genre]?
     
     var body: some View {
         Text("Genres: \(genres?.map { $0.name }.joined(separator: ", ") ?? "N/A")")

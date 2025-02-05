@@ -1,5 +1,5 @@
 //
-//  DefaultURLRequestBuilder.swift
+//  NetworkRequestBuilder.swift
 //  MoviesDB
 //
 //  Created by Ahmad on 05/02/2025.
@@ -7,22 +7,32 @@
 
 import Foundation
 
+// MARK: - 
+protocol URLRequestBuilder {
+    func buildURLRequest(from request: RequestProtocol) throws -> URLRequest
+}
 
 // MARK: - Concrete Implementations
 
-final class DefaultURLRequestBuilder: URLRequestBuilder {
+final class NetworkRequestBuilder: URLRequestBuilder {
     private let baseURL: URL
     private let authToken: String?
+    private let apiToken: String?
     
-    init(baseURL: URL, authToken: String?) {
+    init(baseURL: URL, authToken: String?, apiToken: String?) {
         self.baseURL = baseURL
         self.authToken = authToken
+        self.apiToken = apiToken
     }
     
     func buildURLRequest(from request: RequestProtocol) throws -> URLRequest {
         let url = baseURL.appendingPathComponent(request.path)
-        
+       
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        
+        // Add the API key as a query parameter
+        let apiKeyQueryItem = URLQueryItem(name: "api_key", value: apiToken)
+        urlComponents?.queryItems = [apiKeyQueryItem]
         
         if request.method == .get, let parameters = request.parameters {
             urlComponents?.queryItems = parameters.map {
@@ -47,6 +57,8 @@ final class DefaultURLRequestBuilder: URLRequestBuilder {
         if request.requiresAuthentication, let authToken = authToken {
             urlRequest.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
         }
+        
+       
         
         if request.method != .get, let body = request.body {
             switch request.contentType {

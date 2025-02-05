@@ -1,5 +1,5 @@
 //
-//  DefaultResponseHandler.swift
+//  ResponseHandler.swift
 //  MoviesDB
 //
 //  Created by Ahmad on 05/02/2025.
@@ -11,7 +11,7 @@ protocol ResponseHandler {
     func handleResponse<T: Decodable>(data: Data, response: URLResponse) throws -> T
 }
 
-final class DefaultResponseHandler: ResponseHandler {
+final class APIResponseDecoder: ResponseHandler {
     func handleResponse<T: Decodable>(data: Data, response: URLResponse) throws -> T {
         guard let httpResponse = response as? HTTPURLResponse else {
             throw NetworkError.invalidResponse

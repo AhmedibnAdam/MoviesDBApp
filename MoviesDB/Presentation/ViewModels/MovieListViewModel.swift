@@ -7,22 +7,23 @@
 
 import Foundation
 import SwiftUI
+import NetworkLayer
 
 @MainActor
 final class MovieListViewModel: ObservableObject {
     
     // MARK: - Properties
-    private let fetchMoviesUseCase: FetchMoviesUseCase
+    private let fetchMoviesUseCase: FetchMoviesUseCaseProtocol
     private let coordinator: MovieListCoordinator
     
-    @Published var movies: [Movie] = []
+    @Published var movies: [MoviesEntity.Movie] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     
     let movieType: MovieType
 
     // MARK: - Initialization
-    init(fetchMoviesUseCase: FetchMoviesUseCase, coordinator: MovieListCoordinator, movieType: MovieType) {
+    init(fetchMoviesUseCase: FetchMoviesUseCaseProtocol, coordinator: MovieListCoordinator, movieType: MovieType) {
         self.fetchMoviesUseCase = fetchMoviesUseCase
         self.coordinator = coordinator
         self.movieType = movieType

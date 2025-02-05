@@ -12,7 +12,7 @@ protocol FetchMoviesUseCaseProtocol {
     func execute(params: BaseModel?) async throws -> [MoviesEntity.Movie]
 }
     
-class FetchMoviesUseCaseImpl: FetchMoviesUseCaseProtocol {
+class FetchMoviesUseCase: FetchMoviesUseCaseProtocol {
     private let movieRepository: MovieRepositoryProtocol
 
     init(movieRepository: MovieRepositoryProtocol = MovieRepository()) {

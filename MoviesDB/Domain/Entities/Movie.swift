@@ -12,7 +12,7 @@ import Foundation
 
 struct MoviesEntity {
     
-    struct MoviesListRequestModel: BaseModel {
+    struct MoviesListRequestModel: BaseModel, Sendable {
         let movieType: MovieType
     }
     
@@ -20,30 +20,32 @@ struct MoviesEntity {
         let id: Int
     }
 
-    struct MovieResponse: Decodable {
+    struct MovieResponse: Decodable, Sendable {
         let results: [Movie]
     }
     
-    
-}
-
-
-struct Movie: Decodable, Identifiable {
-    let id: Int
-    let title: String
-    let release_date: String
-    let poster_path: String?
-    let overview: String?
-    let genres: [Genre]?
-    let runtime: Int?
-    
-    var posterURL: URL? {
-        guard let path = poster_path else { return nil }
-        return URL(string: "https://image.tmdb.org/t/p/w500\(path)")
+    struct Movie: Decodable, Identifiable, Sendable {
+        let id: Int
+        let title: String
+        let release_date: String
+        let poster_path: String?
+        let overview: String?
+        let genres: [Genre]?
+        let runtime: Int?
+        
+        var posterURL: URL? {
+            guard let path = poster_path else { return nil }
+            return URL(string: "https://image.tmdb.org/t/p/w500\(path)")
+        }
     }
+
+    struct Genre: Decodable, Sendable {
+        let id: Int
+        let name: String
+    }
+
+    
+    
 }
 
-struct Genre: Decodable {
-    let id: Int
-    let name: String
-}
+

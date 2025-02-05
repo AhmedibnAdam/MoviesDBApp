@@ -1,3 +1,13 @@
+//
+//  RequestProtocol.swift
+//  MoviesDB
+//
+//  Created by Ahmad on 05/02/2025.
+//
+
+import Foundation
+
+
 // MARK: - Request Protocol
 protocol RequestProtocol {
     var path: String { get }

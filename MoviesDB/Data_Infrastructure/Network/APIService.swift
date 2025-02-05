@@ -7,29 +7,25 @@
 
 
 import Foundation
+import NetworkLayer
 
 // MARK: - Abstractions
 protocol MovieService {
-    func fetchMovies(type: String) async throws -> [Movie]
-    func fetchMovieDetails(id: Int) async throws -> Movie
+    func fetchMovies(type: String) async throws -> [MoviesEntity.Movie]
+    func fetchMovieDetails(id: Int) async throws -> MoviesEntity.Movie
 }
 
 final class TMDBMovieService: MovieService {
-    private let networkService: NetworkService
     
-    init(networkService: NetworkService) {
-        self.networkService = networkService
+    func fetchMovies(type: String) async throws -> [MoviesEntity.Movie] {
+        let request = MoviesEndpoint.getMoviesList(type: type)
+        let data: MoviesEntity.MovieResponse = try await NetworkService.shared.request(request)
+        return data.results
     }
     
-    func fetchMovies(type: String) async throws -> [Movie] {
-        let data = try await networkService.performRequest(endpoint: MoviesEndpoint.getMoviesList(type: type))
-        let movieResponse = try JSONDecoder().decode(MoviesEntity.MovieResponse.self, from: data)
-        return movieResponse.results
-    }
-    
-    func fetchMovieDetails(id: Int) async throws -> Movie {
-        let data = try await networkService.performRequest(endpoint: MoviesEndpoint.getMovie(id: id))
-        let movie = try JSONDecoder().decode(Movie.self, from: data)
-        return movie
+    func fetchMovieDetails(id: Int) async throws -> MoviesEntity.Movie {
+        let request = MoviesEndpoint.getMovie(id: id)
+        let data: MoviesEntity.Movie = try await NetworkService.shared.request(request)
+        return data
     }
 }

@@ -1,5 +1,5 @@
 //
-//  DefaultNetworkSession.swift
+//  NetworkSession.swift
 //  MoviesDB
 //
 //  Created by Ahmad on 05/02/2025.
@@ -11,7 +11,7 @@ protocol NetworkSession {
     func data(for request: URLRequest) async throws -> (Data, URLResponse)
 }
 
-final class DefaultNetworkSession: NetworkSession {
+final class URLSessionDispatcher: NetworkSession {
     func data(for request: URLRequest) async throws -> (Data, URLResponse) {
         try await URLSession.shared.data(for: request)
     }

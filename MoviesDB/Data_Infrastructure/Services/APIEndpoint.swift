@@ -6,32 +6,26 @@
 //
 
 import Foundation
+import NetworkLayer
 
-typealias ImageFormData = (name: String?, data: Data?, extention: String)
-typealias Parameters = [String: Any]
+enum MoviesEndpoint: RequestProtocol {
 
-protocol APIEndPoint{
-    var path: String { get }
-    var method: HTTPMethod { get }
-    var parameters: Parameters? { get }
-    var image: ImageFormData? { get }
-}
-
-enum MoviesEndpoint:  APIEndPoint{
     
     case getMoviesList(type: String)
-
     case getMovie(id: Int)
-
-    // MARK: - HTTPMethod
-    var method: HTTPMethod {
-        switch self {
-        case .getMoviesList : return .get
-        case .getMovie : return .get
-        }
+    
+    var baseURL: URL {
+        Configuration.shared.serverURL
     }
-
-    // MARK: - Path
+    
+    var authToken: String?{
+       nil
+    }
+    
+    var apiToken: String?{
+        Configuration.shared.apiKey
+    }
+    
     var path: String {
         switch self {
 
@@ -41,19 +35,43 @@ enum MoviesEndpoint:  APIEndPoint{
             return "\(id)"
         }
     }
-
-    // MARK: - Parameters
-    var parameters: Parameters? {
+    
+    var method: HTTPMethod {
         switch self {
-        default: return nil
+        case .getMoviesList : return .get
+        case .getMovie : return .get
         }
     }
-
-    var image: ImageFormData? {
-        switch self {
-        default: return nil
-        }
+    
+    var headers: [String: String]? {
+        return ["Accept": "application/json"]
+    }
+    
+    var parameters: [String: Any]? {
+        nil
+    }
+    
+    var body: [String: Any]? {
+        nil
+    }
+    
+    var contentType: ContentType {
+        return .json
+    }
+    
+    var requiresAuthentication: Bool {
+        return false
+    }
+    
+    var timeoutInterval: TimeInterval {
+        return 30
+    }
+    
+    var cachePolicy: URLRequest.CachePolicy {
+        return .useProtocolCachePolicy
+    }
+    
+    var retryCount: Int {
+        return 3
     }
 }
-
-

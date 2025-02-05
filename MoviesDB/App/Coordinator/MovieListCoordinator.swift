@@ -17,10 +17,7 @@ class MovieListCoordinator: Coordinator {
     }
 
     func start() -> some View {
-        let networkService = URLSessionNetworkService()
-        let movieService = TMDBMovieService(networkService: networkService)
-        let movieRepository = MovieRepositoryImpl(movieService: movieService)
-        let fetchMovieListUseCase = FetchMoviesUseCaseImpl(movieRepository: movieRepository)
+        let fetchMovieListUseCase = FetchMoviesUseCase()
         let viewModel = MovieListViewModel(fetchMoviesUseCase: fetchMovieListUseCase, coordinator: self, movieType: movieType)
         return MovieListView(viewModel: viewModel)
     }

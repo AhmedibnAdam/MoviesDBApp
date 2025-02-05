@@ -8,20 +8,21 @@
 
 import Foundation
 import SwiftUI
+import NetworkLayer
 
 @MainActor
 final class MovieDetailViewModel: ObservableObject {
     // MARK: - Published Properties
     let movieId: Int
-    @Published var movie: Movie? = nil
+    @Published var movie: MoviesEntity.Movie? = nil
     @Published var isLoading: Bool = false
     @Published var errorMessage: String? = nil
 
     // MARK: - Dependencies
-    private let fetchMovieDetailsUseCase: FetchMovieDetailsUseCase
+    private let fetchMovieDetailsUseCase: FetchMovieDetailsUseCaseProtocol
 
     // MARK: - Initialization
-    init(movieId: Int, fetchMovieDetailsUseCase: FetchMovieDetailsUseCase) {
+    init(movieId: Int, fetchMovieDetailsUseCase: FetchMovieDetailsUseCaseProtocol) {
         self.movieId = movieId
         self.fetchMovieDetailsUseCase = fetchMovieDetailsUseCase
     }

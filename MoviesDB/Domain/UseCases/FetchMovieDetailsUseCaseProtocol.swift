@@ -11,10 +11,10 @@ protocol FetchMovieDetailsUseCaseProtocol {
 }
 
 
-class FetchMovieDetailsUseCaseImpl: FetchMovieDetailsUseCaseProtocol {
+class FetchMovieDetailsUseCase: FetchMovieDetailsUseCaseProtocol {
     private let movieRepository: MovieRepositoryProtocol
 
-    init(movieRepository: MovieRepositoryProtocol) {
+    init(movieRepository: MovieRepositoryProtocol = MovieRepository()) {
         self.movieRepository = movieRepository
     }
 

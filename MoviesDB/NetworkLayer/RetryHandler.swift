@@ -1,13 +1,20 @@
 //
-//  DefaultRetryHandler.swift
+//  RetryHandler.swift
 //  MoviesDB
 //
 //  Created by Ahmad on 05/02/2025.
 //
 
+import Foundation
 
+protocol RetryHandler {
+    func executeWithRetry<T>(
+        retryCount: Int,
+        task: () async throws -> T
+    ) async throws -> T
+}
 
-final class DefaultRetryHandler: RetryHandler {
+final class RequestRetryCoordinator: RetryHandler {
     func executeWithRetry<T>(
         retryCount: Int,
         task: () async throws -> T
