@@ -1,0 +1,15 @@
+{
+  "originHash" : "b390f7ca222f8e7d082b0540c8d09abf7830556faae6e271b7b026f6e824616c",
+  "pins" : [
+    {
+      "identity" : "networklayer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AhmedibnAdam/NetworkLayer.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "98b52199e35df41853a7bc14dc0847b213b1725d"
+      }
+    }
+  ],
+  "version" : 3
+}
