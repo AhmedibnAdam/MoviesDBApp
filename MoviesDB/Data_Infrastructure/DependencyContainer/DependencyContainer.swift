@@ -34,7 +34,7 @@ final class DependencyContainer: ObservableObject {
     func setupCacheModule(context: ModelContext) {
         guard _cacheModule == nil else { return }  // Prevent re-initialization
         do {
-            self._cacheModule = try CacheModuleFactory.make(context: context)
+            self._cacheModule = try CacheModuleFactory.make(context: context, service: Bundle.main.bundleIdentifier ?? "default.service")
         } catch {
             assertionFailure("Failed to initialize CacheModule: \(error)")
         }

@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AhmedibnAdam/CachingModule.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "ac307504710f5bb17ade5410bd3d979cb17c2ee1"
+        "revision" : "e7a43ae4943df05c6ffe2e18d817652c9732262e",
+        "version" : "1.0.1"
       }
     },
     {
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AhmedibnAdam/NetworkLayer.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "3bcf823c48b9d37f799f86c6b832005b0aa89ba6"
+        "revision" : "3bcf823c48b9d37f799f86c6b832005b0aa89ba6",
+        "version" : "1.0.1"
       }
     }
   ],
