@@ -20,11 +20,11 @@ struct MoviesEntity {
         let id: Int
     }
 
-    struct MovieResponse: Decodable, Sendable {
+    struct MovieResponse: Codable, Sendable {
         let results: [Movie]
     }
     
-    struct Movie: Decodable, Identifiable, Sendable {
+    struct Movie: Codable, Identifiable, Sendable {
         let id: Int
         let title: String
         let release_date: String
@@ -39,7 +39,7 @@ struct MoviesEntity {
         }
     }
 
-    struct Genre: Decodable, Sendable {
+    struct Genre: Codable, Sendable {
         let id: Int
         let name: String
     }

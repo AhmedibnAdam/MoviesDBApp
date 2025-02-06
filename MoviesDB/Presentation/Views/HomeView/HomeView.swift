@@ -10,6 +10,7 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject private var viewModel: HomeViewModel
+    @EnvironmentObject var dependencies: DependencyContainer
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -18,7 +19,7 @@ struct HomeView: View {
     var body: some View {
         TabView(selection: $viewModel.selectedMovieType) {
             ForEach(MovieType.allCases, id: \.self) { type in
-                MovieListCoordinator(movieType: type).start()
+                MovieListCoordinator(movieType: type, dependencies: viewModel.dependencies).start()
                     .tabItem {
                         Label(type.label, systemImage: type.systemImage)
                     }

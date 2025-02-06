@@ -10,13 +10,15 @@ import SwiftUI
 @MainActor
 final class AppCoordinator: Coordinator {
     private let initialMovieType: MovieType
+    private let dependencies: DependencyContainer
 
-    init(initialMovieType: MovieType) {
+    init(initialMovieType: MovieType, dependencies: DependencyContainer) {
         self.initialMovieType = initialMovieType
+        self.dependencies = dependencies
     }
 
     func start() -> some View {
-        let homeView = HomeViewCoordinator()
-        return homeView.eraseToAnyView()
+        let homeViewCoordinator = HomeViewCoordinator(dependencies: dependencies)
+        return homeViewCoordinator.eraseToAnyView()
     }
 }

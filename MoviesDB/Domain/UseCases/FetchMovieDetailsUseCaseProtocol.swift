@@ -10,12 +10,13 @@ protocol FetchMovieDetailsUseCaseProtocol {
     func execute(params: BaseModel?) async throws -> MoviesEntity.Movie?
 }
 
-
+@MainActor
 class FetchMovieDetailsUseCase: FetchMovieDetailsUseCaseProtocol {
-    private let movieRepository: MovieRepositoryProtocol
+    private let movieRepository: MovieServiceRepositoryProtocol
 
-    init(movieRepository: MovieRepositoryProtocol = MovieRepository()) {
-        self.movieRepository = movieRepository
+    init(dependencies: DependencyContainer) {
+        self.movieRepository = TMDBMovieServiceRepository(network: dependencies.network,
+                                                          cache: dependencies.cacheModule)
     }
 
     func execute(params: BaseModel?) async throws -> MoviesEntity.Movie? {

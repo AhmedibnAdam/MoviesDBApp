@@ -15,6 +15,7 @@ final class MovieListViewModel: ObservableObject {
     // MARK: - Properties
     private let fetchMoviesUseCase: FetchMoviesUseCaseProtocol
     private let coordinator: MovieListCoordinator
+
     
     @Published var movies: [MoviesEntity.Movie] = []
     @Published var isLoading: Bool = false
@@ -32,7 +33,10 @@ final class MovieListViewModel: ObservableObject {
     // MARK: - Methods
     func fetchMovies() async {
         isLoading = true
-        errorMessage = nil
+        defer {
+            isLoading = false
+            errorMessage = nil
+        }
         
         do {
             movies = try await fetchMoviesUseCase.execute(params: MoviesEntity.MoviesListRequestModel(movieType: movieType))
@@ -42,7 +46,15 @@ final class MovieListViewModel: ObservableObject {
             errorMessage = "An unexpected error "
         }
         
-        isLoading = false
+    }
+    
+    func clearData() async {
+        do {
+            try await fetchMoviesUseCase.clearData(id:  "")
+            self.movies = []
+        } catch {
+            errorMessage = "An unexpected error "
+        }
     }
     
     func navigateToMovieDetail(movieId: Int) -> some View {

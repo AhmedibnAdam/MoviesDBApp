@@ -11,19 +11,21 @@ import SwiftUI
 @MainActor
 class MovieListCoordinator: Coordinator {
     private let movieType: MovieType
+    private let dependencies: DependencyContainer
 
-    init(movieType: MovieType) {
+    init(movieType: MovieType, dependencies: DependencyContainer) {
         self.movieType = movieType
+        self.dependencies = dependencies
     }
 
     func start() -> some View {
-        let fetchMovieListUseCase = FetchMoviesUseCase()
+        let fetchMovieListUseCase = FetchMoviesUseCase(dependencies: dependencies)
         let viewModel = MovieListViewModel(fetchMoviesUseCase: fetchMovieListUseCase, coordinator: self, movieType: movieType)
         return MovieListView(viewModel: viewModel)
     }
 
      func navigateToMovieDetail(movieId: Int) -> some View {
-        let detailCoordinator = MovieDetailCoordinator(movieId: movieId)
+         let detailCoordinator = MovieDetailCoordinator(movieId: movieId, dependencies: dependencies)
         return detailCoordinator.eraseToAnyView()
     }
 }

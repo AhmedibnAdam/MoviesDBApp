@@ -1,13 +1,22 @@
 {
-  "originHash" : "b390f7ca222f8e7d082b0540c8d09abf7830556faae6e271b7b026f6e824616c",
+  "originHash" : "f539f2de2a7b5f05b17f63a081ad23557fd6a3f133c84cb23a539d67414edf8b",
   "pins" : [
+    {
+      "identity" : "cachingmodule",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AhmedibnAdam/CachingModule.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ac307504710f5bb17ade5410bd3d979cb17c2ee1"
+      }
+    },
     {
       "identity" : "networklayer",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AhmedibnAdam/NetworkLayer.git",
       "state" : {
         "branch" : "main",
-        "revision" : "98b52199e35df41853a7bc14dc0847b213b1725d"
+        "revision" : "3bcf823c48b9d37f799f86c6b832005b0aa89ba6"
       }
     }
   ],

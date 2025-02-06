@@ -11,8 +11,10 @@ import SwiftUI
 class HomeViewModel: ObservableObject {
     @Published var selectedMovieType: MovieType
     private let coordinator: any Coordinator
+    let dependencies: DependencyContainer
 
-    init(selectedMovieType: MovieType, coordinator: any Coordinator ) {
+    init(selectedMovieType: MovieType, coordinator: any Coordinator, dependencies: DependencyContainer) {
+        self.dependencies = dependencies
         self.selectedMovieType = selectedMovieType
         self.coordinator = coordinator
     }

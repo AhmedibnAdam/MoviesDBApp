@@ -9,8 +9,6 @@ import Foundation
 import NetworkLayer
 
 enum MoviesEndpoint: RequestProtocol {
-
-    
     case getMoviesList(type: String)
     case getMovie(id: Int)
     
