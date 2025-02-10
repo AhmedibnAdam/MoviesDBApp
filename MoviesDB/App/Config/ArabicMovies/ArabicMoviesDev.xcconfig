@@ -1,0 +1,28 @@
+//
+//  ArabicMoviesDev.xcconfig
+//  MoviesDB
+//
+//  Created by Ahmad on 10/02/2025.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+
+SERVER_URL = https:/$()/api.themoviedb.org/3/movie/
+ROOT_URL = https:/$()/api.themoviedb.org/3/movie/
+
+
+// Keys
+API_KEY = 993cef1c1dd9bee98784c4cff96db03e
+
+FIREBASE_PLIST =
+GMSService =
+
+// App Settings
+ENVIRONMENT = MoviesDB
+APP_NAME = MoviesDB
+APP_BUNDLE_ID = Adam.TechnicalTask.MoviesDB
+
+// Support
+LOADER_ANIMATION_NAME = loader

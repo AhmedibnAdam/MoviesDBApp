@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AhmedibnAdam/CachingModule.git",
       "state" : {
-        "revision" : "e7a43ae4943df05c6ffe2e18d817652c9732262e",
-        "version" : "1.0.1"
+        "branch" : "main",
+        "revision" : "09f418b876ccfa3258a747ed365d3682ce8e35c2"
       }
     },
     {
