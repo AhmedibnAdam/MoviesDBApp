@@ -6,7 +6,49 @@ Building an ios app that displays a list of now playing, popular, and upcoming
 movies from The Movie Database (TMDb) API and allows users to view details of
 each movie upon clicking.
 
+MoviesDB is an iOS application that supports three different targets: 
+1. **MoviesDB** - General movie database.
+2. **ArabicMoviesDB** - A version of the app focused on Arabic movies.
+3. **AnmiMoviesDB** - A version of the app focused on anime movies.
+
+Each target has its own build schemes, configuration files, Info.plist, and asset catalog to customize the app accordingly.
+
 ---
+
+## Project Structure
+
+### Targets
+- **MoviesDB**
+- **ArabicMoviesDB**
+- **AnmiMoviesDB**
+
+### Schemes
+Each target has two schemes for development and production:
+- **MoviesDB-Dev**
+- **MoviesDB-Production**
+- **AnmiMoviesDB-Dev**
+- **AnmiMoviesDB-Production**
+- **ArabicMoviesDB-Dev**
+- **ArabicMoviesDB-Production**
+
+### Configuration Files (.xcconfig)
+The project utilizes xcconfig files for different environments:
+- **AnmiMoviesDev.xcconfig** - Configuration for AnmiMoviesDB Development
+- **AnmiMoviesProduction.xcconfig** - Configuration for AnmiMoviesDB Production
+- **ArabicMoviesDev.xcconfig** - Configuration for ArabicMoviesDB Development
+- **ArabicMoviesProduction.xcconfig** - Configuration for ArabicMoviesDB Production
+- **Development.xcconfig** - General Development settings
+- **Release.xcconfig** - General Release settings
+
+### Info.plist Files
+Each target has its own `Info.plist` file to customize settings such as:
+- Bundle Identifier
+- Display Name
+- App-Specific Configurations
+
+### Asset Catalogs
+Each target has its own asset catalog to store images, icons, and other resources specific to that app version.
+
 
 ## Features  
 - **Dynamic Content**: Displays updated content for now playing, popular, and upcoming
