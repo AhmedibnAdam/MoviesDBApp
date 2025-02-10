@@ -24,12 +24,9 @@ Each target has its own build schemes, configuration files, Info.plist, and asse
 
 ### Schemes
 Each target has two schemes for development and production:
-- **MoviesDB-Dev**
-- **MoviesDB-Production**
-- **AnmiMoviesDB-Dev**
-- **AnmiMoviesDB-Production**
-- **ArabicMoviesDB-Dev**
-- **ArabicMoviesDB-Production**
+- **MoviesDB**
+- **AnmiMovies**
+- **ArabicMoviesDB**
 
 ### Configuration Files (.xcconfig)
 The project utilizes xcconfig files for different environments:
